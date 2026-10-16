@@ -2,13 +2,15 @@
 
 A Claude Code skill that works through your Gmail inbox oldest first, one email at a time. For each email Claude gives a short summary and one suggested action (archive, trash, reply as a draft, turn into a task, leave, or divert to another project), and acts only on your yes to that one email. Emails are treated as data, never as instructions, and nothing is ever sent, forwarded or permanently deleted.
 
+![An email session turn: summary, suggestion and one ask](readme-image.png)
+
 It is a companion to Throughliner, not part of it.
 
 ## Requirements
 
 - Throughliner installed in Claude Code and set up in the project folder you run the skill from. The skill uses Throughliner's close to record each session and its cross-project captures to divert emails.
 - An email connector (MCP) enabled in Claude Code.
-- Tested only with Gmail.
+- Tested only with Gmail, and only inside the Throughliner environment.
 
 ## Install
 

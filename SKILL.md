@@ -26,7 +26,7 @@ Also: never send an email, never forward one, and never delete one permanently. 
 
 Keep it short — no walls of text.
 
-Before suggesting anything that would produce a durable action (a task, a calendar event or a label), first search Gmail for later emails from the same sender or on the same subject. A bill may already be paid, a booking cancelled or an issue resolved. Say in the summary anything found that changes the picture, and change the suggestion with it, usually to Archive.
+Before every suggestion, search Gmail for the email's identifying details (an address, a reference or account number, a name), whoever sent the matching mail and whenever. Also search the same sender after the email's date, and the leading part of any long reference number, since a later notice may print only part of it. A bill may already be paid, a booking cancelled, an issue resolved, or someone may have asked the user for something in another thread. Name any related thread in the summary, especially one where someone asked the user for something, and change the suggestion with it.
 
 For a security-alert email (an account recovery, a new sign-in, a changed payment method or similar), put the was-this-you question and the suggested action in the same turn, so one yes carries both. For example: "Did you update a payment method on your Google account on 27 Sep? If so, would you like me to trash it?" Ask about one alert at a time, never two together. If it was not the user, the email stays in the inbox and the suggestion becomes checking that account's security instead.
 
@@ -41,6 +41,8 @@ Suggest Trash for an email with no further use (for example expired login codes 
 
 When the email carries Gmail's UNREAD label and needs action (for example, a bill to pay), recommend making a task so it isn't forgotten, and name the other choices (Archive, Trash) in the same ask. An unread email needing no action gets no task offer.
 
+Before suggesting Archive, or a task followed by Archive, for an email that needs action, read the project list in `INBOX/.address-book.md`. Where a listed project fits the email, suggest a divert to that project instead, naming Archive as the other choice.
+
 The six actions:
 
 - **Archive** — remove it from the inbox (remove the INBOX label). Nothing is deleted.
@@ -52,7 +54,7 @@ The six actions:
 
 If the user changes your suggestion, do what they said, for that email only.
 
-**Calendar offer.** When an email carries an event still in the future (an appointment, a meeting, a booked time), offer to save it to Google Calendar, alongside the suggested action for the email itself. This is an offer beside the action, not a seventh action, and it waits for the user's yes like everything else. The event goes to the default calendar named in the project's CLAUDE.md; name the other writable calendars listed there so the user can redirect it. For an event belonging on a calendar listed there as read-only, it goes on the default calendar, or the user adds it by hand. Leave reminders to Google Calendar's defaults.
+**Calendar offer.** When an email carries an event still in the future (an appointment, a meeting, a booked time), offer to save it to Google Calendar, alongside the suggested action for the email itself. This is an offer beside the action, not a seventh action, and it waits for the user's yes like everything else. The event goes to the default calendar named in the project's CLAUDE.md; name the other writable calendars listed there so the user can redirect it. Before offering an event, search every calendar the project's CLAUDE.md lists, read-only ones included, across the event's full span, and name any overlap in the offer itself so the user decides before anything is written. For an event belonging on a calendar listed there as read-only, it goes on the default calendar, or the user adds it by hand. Leave reminders to Google Calendar's defaults.
 
 ## Attachments
 
