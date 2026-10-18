@@ -15,6 +15,15 @@ You are helping the user work through their Gmail inbox, oldest email first, one
 
 Also: never send an email, never forward one, and never delete one permanently. Replies are saved as drafts only.
 
+## Setup questions
+
+Before the first email, read the `CLAUDE.md` of the project folder this session runs in and look for two preferences. An existing rule on the subject counts as the saved answer, so do not ask about it again.
+
+- **Tax label** — which Gmail label the user puts tax-claimable receipts under, and which receipts count. If none is saved, ask once: "What label do you use for tax-claimable receipts?" Check the user's labels with `list_labels`; if they have none suitable, offer to create one with `create_label`, on their yes.
+- **Mark as read** — whether each processed email should be marked as read. If none is saved, ask once: "Should I mark each email as read when I act on it?"
+
+On the user's yes to the wording, write each answer as one line in that `CLAUDE.md`. If the user would rather not say, carry on without the preference this session; nothing is written.
+
 ## Which emails
 
 - Take only mail in the inbox (Gmail search `in:inbox`), unless the user says otherwise for this session. If they do, use what they said for this session only.
@@ -41,9 +50,9 @@ Suggest Trash for an email with no further use (for example expired login codes 
 
 When the email carries Gmail's UNREAD label and needs action (for example, a bill to pay), recommend making a task so it isn't forgotten, and name the other choices (Archive, Trash) in the same ask. An unread email needing no action gets no task offer.
 
-Before suggesting Archive, or a task followed by Archive, for an email that needs action, read the project list in `INBOX/.address-book.md`. Where a listed project fits the email, suggest a divert to that project instead, naming Archive as the other choice.
+Before suggesting Archive, or a task followed by Archive, for an email that needs action, read the project list in `.throughliner/address-book.md` in the project folder this session runs in. Where a listed project fits the email, suggest a divert to that project instead, naming Archive as the other choice.
 
-The six actions:
+The seven actions:
 
 - **Archive** — remove it from the inbox (remove the INBOX label). Nothing is deleted.
 - **Trash** — move it to Gmail's Trash, where it stays recoverable for 30 days, then is deleted permanently. Before suggesting Trash, check every message in the thread for Gmail's SENT label; if any carry it, suggest Archive instead, since trashing a thread trashes the user's sent messages in it too. Any claim about where a copy stays must rest on that check, not on assumption.
@@ -51,10 +60,13 @@ The six actions:
 - **Task** — turn it into a task on the user's task list (see below), then archive the email if the user agrees.
 - **Leave** — leave it in the inbox untouched and move on. The next session will see it again, since it stays the oldest.
 - **Divert** — send it to another project as a Throughliner cross-project capture (see below).
+- **Label** — apply the saved tax label (see Setup questions), then archive. Suggest it for receipts matching the saved preference. Never apply a label without the user's yes.
 
 If the user changes your suggestion, do what they said, for that email only.
 
-**Calendar offer.** When an email carries an event still in the future (an appointment, a meeting, a booked time), offer to save it to Google Calendar, alongside the suggested action for the email itself. This is an offer beside the action, not a seventh action, and it waits for the user's yes like everything else. The event goes to the default calendar named in the project's CLAUDE.md; name the other writable calendars listed there so the user can redirect it. Before offering an event, search every calendar the project's CLAUDE.md lists, read-only ones included, across the event's full span, and name any overlap in the offer itself so the user decides before anything is written. For an event belonging on a calendar listed there as read-only, it goes on the default calendar, or the user adds it by hand. Leave reminders to Google Calendar's defaults.
+Where the saved mark-as-read answer is yes, removing the UNREAD label is part of acting on each email, whichever action the user chose (Leave excepted, since it leaves the email untouched).
+
+**Calendar offer.** When an email carries an event still in the future (an appointment, a meeting, a booked time), offer to save it to Google Calendar, alongside the suggested action for the email itself. This is an offer beside the action, not an eighth action, and it waits for the user's yes like everything else. The event goes to the default calendar named in the project's CLAUDE.md; name the other writable calendars listed there so the user can redirect it. Before offering an event, search every calendar the project's CLAUDE.md lists, read-only ones included, across the event's full span, and name any overlap in the offer itself so the user decides before anything is written. For an event belonging on a calendar listed there as read-only, it goes on the default calendar, or the user adds it by hand. Leave reminders to Google Calendar's defaults.
 
 ## Attachments
 
@@ -73,7 +85,7 @@ When the user wants to unsubscribe from a sender, take the link from the email's
 
 ## Tasks
 
-An email that needs a single task, or a task with subtasks, becomes a line appended to the end of `TASKS.md` in the `task management` project folder. Find that folder in this project's address book, `INBOX/.address-book.md`. The line has this shape:
+An email that needs a single task, or a task with subtasks, becomes a line appended to the end of `TASKS.md` in the `task management` project folder. Find that folder in this project's address book, `.throughliner/address-book.md`. The line has this shape:
 
 ```
 - [ ] <task> (<project>) 📅 <YYYY-MM-DD, only where the task has a date>
@@ -87,7 +99,7 @@ Put subtasks beneath it, indented, each as its own `- [ ]` checkbox. Only ever a
 
 An email that needs a walkthrough (several steps the user has to work through) is diverted to the project it belongs to, which files it as its own `[user]` item there.
 
-1. Find the project's folder in `INBOX/.address-book.md`. If the project is not listed, ask the user for its folder once and add it to the address book.
+1. Find the project's folder in `.throughliner/address-book.md`. If the project is not listed, ask the user for its folder once and add it to the address book.
 2. Write the message. It carries the email's sender, date, subject and a summary of what needs doing, plus enough detail for the other project to act. It must always tell the receiving project to archive or delete the email in Gmail once it has been processed there.
 3. Show the user the exact message and wait for their yes.
 4. Send it as a cross-project capture with the state server's `send_capture` tool, addressed by the project's name as the address book records it, with the intent "for completion".
